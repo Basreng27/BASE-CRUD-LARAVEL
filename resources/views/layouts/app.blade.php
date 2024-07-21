@@ -21,6 +21,9 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -44,7 +47,7 @@
         </main>
 
         {{-- Modal --}}
-        <div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="modalFormLabel" aria-hidden="true" style="--bs-modal-bg: rgb(17 24 39); color: white">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -67,7 +70,7 @@
             </div>
         </div>
 
-        <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="modalDelete" data-bs-backdrop="static" data-bs-keyboard="false"
             aria-labelledby="modalDeleteLabel" aria-hidden="true" style="--bs-modal-bg: rgb(17 24 39); color: white">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -91,9 +94,7 @@
         </div>
 
         {{-- Toasr --}}
-        <div id="toasr-show">
-
-        </div>
+        <div id="toasr-show"></div>
 
         {{-- Bootstraps Javascript --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
@@ -106,6 +107,10 @@
         {{-- JQuery --}}
         <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
         <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+        {{-- Select2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         {{-- Load Custom File --}}
         <script src="{{ asset('assets/js/custom.js') }}"></script>

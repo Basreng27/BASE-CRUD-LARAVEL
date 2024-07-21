@@ -3,6 +3,7 @@
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,6 +36,13 @@ Route::middleware('auth')->group(function () {
         'show' => 'role.show',
         'store' => 'role.store',
         'destroy' => 'role.destroy',
+    ]);
+
+    Route::resource('user', UserController::class)->parameters(['user' => 'id'])->names([
+        'index' => 'user.index',
+        'show' => 'user.show',
+        'store' => 'user.store',
+        'destroy' => 'user.destroy',
     ]);
 });
 

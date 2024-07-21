@@ -18,3 +18,10 @@ Definisikan Variable Untuk Global Seperti Di App.blade.php atau navigation.blade
         config pada provider untuk load file diatas
     navigation.blade.php
         tampilkan data yang telah dibuat
+
+Membuat Update Migration
+    php artisan make:migration add_role_id_to_users_table --table=users (cek isinya)
+    Jalankan migrate lagi
+
+Membuat <x-select-option></x-select-option> Atau <x-input></x-input>
+    php artisan make:component SelectOption (Contohnya ada dan pemakaiannya di user/form)
