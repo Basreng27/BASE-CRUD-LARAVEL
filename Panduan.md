@@ -11,3 +11,10 @@ Pasang CDN Bootsraps
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     Dan Hapus bg-white
 
+Definisikan Variable Untuk Global Seperti Di App.blade.php atau navigation.blade.php
+    app\Providers\AppServiceProvider.php
+        Buat data untuk load data apa yang akan ditampilkan
+    config\auth.php
+        config pada provider untuk load file diatas
+    navigation.blade.php
+        tampilkan data yang telah dibuat

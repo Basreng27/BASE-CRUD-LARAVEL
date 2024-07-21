@@ -17,6 +17,8 @@ $(document).ready(function() {
     $('#formStore').on('submit', function(event) {
         event.preventDefault();
 
+        $('#btn-save').attr('disabled', true);
+
         let form = $(this);
         let url = $(this).data('action');
         let formData = form.serialize();
@@ -29,11 +31,18 @@ $(document).ready(function() {
                 if (response.status) {
                     $('#toasr-show').append(toasr(response.statusText, response.message))
                     $('#liveToast').show()
-                    $('#btn-save').prop('disabled', true);
 
                     setTimeout(function() {
                         $('#modalForm').modal('hide');
                         location.reload();
+                    }, 2000);
+                } else {
+                    console.log(response);
+                    $('#toasr-show').append(toasr(response.statusText, response.message))
+                    $('#liveToast').show()
+
+                    setTimeout(function() {
+                        $('#liveToast').hide()
                     }, 2000);
                 }
             },
@@ -44,6 +53,8 @@ $(document).ready(function() {
                 setTimeout(function() {
                     $('#liveToast').hide()
                 }, 2000);
+
+                $('#btn-save').prop('disabled', false);
             }
         });
     });

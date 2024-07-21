@@ -7,9 +7,6 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $data['url_form'] = route('menu.show', ['id' => 0]);
@@ -21,22 +18,10 @@ class MenuController extends Controller
         return view('menu.display', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         try {
             $id = $request->input('id');
-
 
             if ($id) {
                 $data = $request->validate([
@@ -48,9 +33,15 @@ class MenuController extends Controller
                 Menu::where('id', $id)->update($data);
             } else {
                 $data = $request->validate([
-                    'name' => ['required', 'unique:menus'],
-                    'url' => ['required', 'unique:menus'],
-                    'sequence' => ['required', 'integer', 'unique:menus']
+                    'name' => ['required', 'unique:menus,name'],
+                    'url' => ['required', 'unique:menus,url'],
+                    'sequence' => ['required', 'integer', 'unique:menus,sequence']
+                ], [
+                    'name.required' => 'Menu Wajib Diisi.',
+                    'name.unique' => 'Menu Yang Masukan Telah Digunakan.',
+                    'url.required' => 'URL Wajib Diisi.',
+                    'sequence.required' => 'Urutan Wajib Diisi.',
+                    'sequence.integer' => 'Urutan Harus Angka.'
                 ]);
 
                 Menu::create($data);
@@ -70,9 +61,6 @@ class MenuController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show($id = null)
     {
         $data['data'] = Menu::where('id', $id)->first();
@@ -80,25 +68,6 @@ class MenuController extends Controller
         return view('menu.form', $data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         try {
@@ -106,12 +75,12 @@ class MenuController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Item deleted successfully'
+                'message' => 'Data Berhasil Dihapus'
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Failed to delete item'
+                'message' => 'Data Gagal Dihapus'
             ], 500);
         }
     }
