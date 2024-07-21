@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,13 @@ Route::middleware('auth')->group(function () {
         'show' => 'menu.show',
         'store' => 'menu.store',
         'destroy' => 'menu.destroy',
+    ]);
+
+    Route::resource('role', RoleController::class)->parameters(['role' => 'id'])->names([
+        'index' => 'role.index',
+        'show' => 'role.show',
+        'store' => 'role.store',
+        'destroy' => 'role.destroy',
     ]);
 });
 
