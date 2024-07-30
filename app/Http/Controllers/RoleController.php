@@ -7,15 +7,28 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data['url_form'] = route('role.show', ['id' => 0]);
         $data['url_delete'] = route('role.destroy', ['id' => 0]);
         $data['url_action'] = route('role.store');
+        $data['url_data'] = route('role.index');
 
-        $data['data'] = Role::paginate(5);
+        $data['data'] = $this->data($request);
 
         return view('role.display', $data);
+    }
+
+    private function data($request)
+    {
+        $query = Role::query();
+
+        $name = $request->input('name');
+
+        if ($name)
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($name) . '%']);
+
+        return $query->paginate(5)->appends($request->all());
     }
 
     public function store(Request $request)

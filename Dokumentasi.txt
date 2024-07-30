@@ -1,33 +1,41 @@
-Install Laravel
+=> Install Laravel
     composer create-project laravel/laravel=version nama-folder
 
-Install Laravel Brezee Untuk Login
+=> Install Laravel Brezee Untuk Login
     composer require laravel/breeze --dev
     php artisan breeze:install
 
-Pasang CDN Bootsraps
+=> Pasang CDN Bootsraps
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     Dan Hapus bg-white
 
-Definisikan Variable Untuk Global Seperti Di App.blade.php atau navigation.blade.php
-    app\Providers\AppServiceProvider.php
-        Buat data untuk load data apa yang akan ditampilkan
-    config\auth.php
-        config pada provider untuk load file diatas
-    navigation.blade.php
-        tampilkan data yang telah dibuat
+=> Definisikan Variable Untuk Global Seperti Di App.blade.php atau navigation.blade.php
+    => Buat data untuk load data apa yang akan ditampilkan
+        app\Providers\AppServiceProvider.php
+    +> config pada provider untuk load file diatas
+        config\auth.php
+    => tampilkan data yang telah dibuat
+        navigation.blade.php
 
-Membuat Update Migration
-    php artisan make:migration add_role_id_to_users_table --table=users (cek isinya)
-    Jalankan migrate lagi
+=> Membuat Update Migration
+    =>Jalankan migrate lagi
+        php artisan make:migration add_role_id_to_users_table --table=users (cek isinya)
 
-Membuat <x-select-option></x-select-option> Atau <x-input></x-input>
+=> Membuat <x-select-option></x-select-option> Atau <x-input></x-input>
     php artisan make:component SelectOption (Contohnya ada dan pemakaiannya di user/form)
 
-Membuat Pagination
-    Di Controller
+=> Membuat Pagination
+    => Di Controller
         $data['data'] = Menu::paginate(5);
-    Di View
+    => Di View
         {{ $data->links() }}
+
+=> Membuat Aplikasi Tidak Bisa Diakses Dari url
+    => Install CheckAccess
+        php artisan make:middleware CheckDirectAccess
+    => Tambahkan/Liat Di app/Http/Middleware/CheckDirectAccess.php
+    => Tambahkan Di bootstrap/app.php Untuk Middleware
+    => Tambahkan Di routes/web.php Untuk Middleware Routenya
+

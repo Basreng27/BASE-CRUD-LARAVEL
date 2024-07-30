@@ -12,9 +12,11 @@
 
                 @foreach ($menu as $key => $value)
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route($value['url'])" :active="request()->routeIs($value['url'])">
-                            {{ __($value['name']) }}
-                        </x-nav-link>
+                        @if ($value['url'] != '#')
+                            <x-nav-link :href="route($value['url'])" :active="request()->routeIs($value['url'])">
+                                {{ __($value['name']) }}
+                            </x-nav-link>
+                        @endif
                     </div>
                 @endforeach
             </div>

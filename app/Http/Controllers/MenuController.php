@@ -7,15 +7,32 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data['url_form'] = route('menu.show', ['id' => 0]);
         $data['url_delete'] = route('menu.destroy', ['id' => 0]);
         $data['url_action'] = route('menu.store');
+        $data['url_data'] = route('menu.index');
 
-        $data['data'] = Menu::paginate(5);
+        $data['data'] = $this->data($request);
 
         return view('menu.display', $data);
+    }
+
+    private function data($request)
+    {
+        $query = Menu::query();
+
+        $menu = $request->input('menu');
+        $url = $request->input('url');
+
+        if ($menu)
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($menu) . '%']);
+
+        if ($url)
+            $query->orWhereRaw('LOWER(url) LIKE ?', ['%' . strtolower($url) . '%']);
+
+        return $query->paginate(5)->appends($request->all());
     }
 
     public function store(Request $request)

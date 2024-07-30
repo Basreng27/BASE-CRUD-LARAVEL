@@ -9,15 +9,39 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $data['url_form'] = route('user.show', ['id' => 0]);
         $data['url_delete'] = route('user.destroy', ['id' => 0]);
         $data['url_action'] = route('user.store');
+        $data['url_data'] = route('user.index');
 
-        $data['data'] = User::with('role')->paginate(5);
+        $data['data'] = $this->data($request);
 
         return view('user.display', $data);
+    }
+
+    private function data($request)
+    {
+        $query = User::query();
+
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $role = $request->input('role');
+
+        if ($name)
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($name) . '%']);
+
+        if ($email)
+            $query->whereRaw('LOWER(email) LIKE ?', ['%' . strtolower($email) . '%']);
+
+        if ($role) {
+            $query->whereHas('role', function ($q) use ($role) {
+                $q->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($role) . '%']);
+            });
+        }
+
+        return $query->with('role')->paginate(5)->appends($request->all());
     }
 
     public function store(Request $request)
