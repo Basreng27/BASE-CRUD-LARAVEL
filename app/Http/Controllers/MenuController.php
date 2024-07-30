@@ -13,7 +13,7 @@ class MenuController extends Controller
         $data['url_delete'] = route('menu.destroy', ['id' => 0]);
         $data['url_action'] = route('menu.store');
 
-        $data['data'] = Menu::all();
+        $data['data'] = Menu::paginate(5);
 
         return view('menu.display', $data);
     }

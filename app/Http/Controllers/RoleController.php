@@ -13,7 +13,7 @@ class RoleController extends Controller
         $data['url_delete'] = route('role.destroy', ['id' => 0]);
         $data['url_action'] = route('role.store');
 
-        $data['data'] = Role::all();
+        $data['data'] = Role::paginate(5);
 
         return view('role.display', $data);
     }

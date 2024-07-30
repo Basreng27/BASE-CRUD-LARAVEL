@@ -25,3 +25,9 @@ Membuat Update Migration
 
 Membuat <x-select-option></x-select-option> Atau <x-input></x-input>
     php artisan make:component SelectOption (Contohnya ada dan pemakaiannya di user/form)
+
+Membuat Pagination
+    Di Controller
+        $data['data'] = Menu::paginate(5);
+    Di View
+        {{ $data->links() }}

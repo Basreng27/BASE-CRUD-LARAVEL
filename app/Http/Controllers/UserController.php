@@ -15,7 +15,7 @@ class UserController extends Controller
         $data['url_delete'] = route('user.destroy', ['id' => 0]);
         $data['url_action'] = route('user.store');
 
-        $data['data'] = User::with('role')->get()->toArray();
+        $data['data'] = User::with('role')->paginate(5);
 
         return view('user.display', $data);
     }
